@@ -1,5 +1,5 @@
 export default class ApiService {
-    _apiBase = 'http://testapp/wp-json/wp/v2';
+    _apiBase = 'http://lordar01.z2t.testforhost.com/inspiration/wp-json/wp/v2';
 
     async getResource(url) {
       const res = await fetch(`${this._apiBase}${url}`);
