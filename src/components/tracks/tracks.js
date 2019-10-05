@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+
 import ApiService from '../../service/service';
 
 class TrackList extends Component {
@@ -49,10 +51,10 @@ class TrackList extends Component {
 export default TrackList;
 
 const TrackListItem = ({track}) => {
-    const { title } = track;
+    const { title, id } = track;
     return (
         <React.Fragment>
-            <li>{title.rendered}</li>
+            <li><Link to = {`./song/${id}`}>{title.rendered}</Link></li>
         </React.Fragment>
     )
 

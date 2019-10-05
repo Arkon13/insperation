@@ -1,18 +1,15 @@
 import React from 'react';
-import Header from './components/header';
-import RandomSong from './components/random-song';
-import AlbumsPanel from './components/albums-panel';
+import Home from './components/home';
+import Song from './components/song';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 
 function App() {
   return (
-    <div>
-        <Header />
-        <RandomSong />
-    <div className = "container-fluid">
-          <AlbumsPanel />
-        </div>
-    </div>
+    <Router>
+        <Route path= "/" exact component = {Home} />
+        <Route path = "/song/:id" exact component = {Song} />
+    </Router>
   );
 }
 
