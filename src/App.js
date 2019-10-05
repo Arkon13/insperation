@@ -1,8 +1,7 @@
 import React from 'react';
 import Header from './components/header';
-import Albums from './components/albums';
 import RandomSong from './components/random-song';
-import TrackList from './components/tracks';
+import AlbumsPanel from './components/albums-panel';
 
 
 function App() {
@@ -11,10 +10,7 @@ function App() {
         <Header />
         <RandomSong />
     <div className = "container-fluid">
-        <div className = "row">
-            <Albums />
-            <TrackList />
-        </div>
+          <AlbumsPanel />
         </div>
     </div>
   );

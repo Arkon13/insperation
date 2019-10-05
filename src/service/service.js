@@ -24,7 +24,8 @@ export default class ApiService {
     _transformAlbum(album) {
         return {
             name: album.name,
-            count: album.count
+            count: album.count,
+            id: album.id
         }
     }
     _transformSong() {

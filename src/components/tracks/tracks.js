@@ -8,24 +8,38 @@ class TrackList extends Component {
         this.state = {
             trackList: []
         }
+        
+    }
+
+    componentDidMount() {
         this.loadTrackList();
     }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.albumId !== prevProps.albumId) {
+            this.loadTrackList();
+        }
+      }
+    
 
     updateTrackList = (trackList) => {
         this.setState({trackList})
     }
 
+
     loadTrackList() {
-        const id = 1
-        this.apiService.getAllSong(id)
+        const { albumId } = this.props;
+        this.apiService.getAllSong(albumId)
         .then(this.updateTrackList)
     }
     render() {
+        console.log(this.props.albumId)
         const {trackList} = this.state;
+        console.log(trackList, "tracks")
         return (
             <div className = "col-lg-6">
                 <ul>
-                    { trackList.map(track => <TrackListItem track = {track} />) }
+                    { trackList.map(track => <TrackListItem track = {track} key = {track.id}/>) }
                 </ul>
             </div>
         )
@@ -34,10 +48,11 @@ class TrackList extends Component {
 
 export default TrackList;
 
-const TrackListItem = () => {
+const TrackListItem = ({track}) => {
+    const { title } = track;
     return (
         <React.Fragment>
-            <li>Экстрасенс</li>
+            <li>{title.rendered}</li>
         </React.Fragment>
     )
 

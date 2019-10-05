@@ -1,30 +1,28 @@
 import React, { Component } from 'react';
-import ApiService from '../../service/service';
+
 
 class Albums extends Component {
-    apiService = new ApiService()
-    constructor() {
-        super()
-        this.state = {
-            albums: {},
-            loading: true
-        }
-        this.loadAlbums()
-    }
+    
 
-    updateAlbums = (albums) => {
-        this.setState({albums, loading: false})
-    }
 
-    loadAlbums() {
-        this.apiService.getAllAlbums()
-        .then(this.updateAlbums)
+    renderAlbumsItem(arr) {
+        return arr.map(({name, count, id}) => {
+            return (
+                <li className="list-group-item d-flex justify-content-between align-items-center" key = {id}
+                onClick={() => this.props.onItemSelected(id)}>
+                    {name} 
+                  <span className="badge badge-primary badge-pill">{count}</span>
+                </li>
+            )
+        }) 
     }
 
     render() {
-        const { albums, loading } = this.state;
-        console.log(albums)
-        const allalbums = !loading ? albums.map(album => <AlbumItem  album = {album} />) : 'Loading'
+        const { albums } = this.props;
+        if (!albums) {
+            return <div>Loading</div>;
+          }
+        const allalbums = this.renderAlbumsItem(albums);
         return(
             <div className = "col-lg-6">
                 <ul className="list-group">
@@ -41,14 +39,3 @@ class Albums extends Component {
 
 export default Albums;
 
-const AlbumItem = ({album}) => {
-    const {name, count} = album;
-    return(
-        <React.Fragment>
-            <li className="list-group-item d-flex justify-content-between align-items-center">
-                {name}
-              <span className="badge badge-primary badge-pill">{count}</span>
-            </li>
-        </React.Fragment>
-    )
-}
