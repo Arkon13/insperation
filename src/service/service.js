@@ -18,8 +18,9 @@ export default class ApiService {
         const res = await this.getResource(`/posts?categories=${id}`)
         return res;
     }
-    getSong(id) {
-        return this.getResource(`/post/${id}`)
+    async getSong(id) {
+        const songInfo = await this.getResource(`/posts/${id}`)
+        return this._transformSong(songInfo)
     }
     _transformAlbum(album) {
         return {
@@ -28,9 +29,10 @@ export default class ApiService {
             id: album.id
         }
     }
-    _transformSong() {
+    _transformSong(songInfo) {
         return {
-
+            title: songInfo.title.rendered,
+            text: songInfo.content.rendered
         }
     }
  }
